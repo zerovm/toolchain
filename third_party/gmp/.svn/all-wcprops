@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/native_client/!svn/ver/9987/trunk/src/third_party/gmp
+END
+COPYING
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/native_client/!svn/ver/2161/trunk/src/third_party/gmp/COPYING
+END
+COPYING.LIB
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/native_client/!svn/ver/2161/trunk/src/third_party/gmp/COPYING.LIB
+END
+gmp-5.0.2.tar.bz2
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/native_client/!svn/ver/5218/trunk/src/third_party/gmp/gmp-5.0.2.tar.bz2
+END
+gmp-5.0.5.tar.bz2
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/native_client/!svn/ver/9011/trunk/src/third_party/gmp/gmp-5.0.5.tar.bz2
+END

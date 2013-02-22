@@ -1,0 +1,11 @@
+SRC/glibc
+SRC/newlib
+SRC/binutils
+SRC/gcc
+SRC/gdb
+SRC/linux-headers-for-nacl
+SRC/.gcc-extra-cloog-ppl
+SRC/.gcc-extra-gmp
+SRC/.gcc-extra-mpc
+SRC/.gcc-extra-mpfr
+SRC/.gcc-extra-ppl

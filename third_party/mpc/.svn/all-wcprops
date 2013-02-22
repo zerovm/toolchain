@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/native_client/!svn/ver/9987/trunk/src/third_party/mpc
+END
+COPYING.LIB
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/native_client/!svn/ver/5215/trunk/src/third_party/mpc/COPYING.LIB
+END
+mpc-1.0.tar.gz
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/native_client/!svn/ver/9987/trunk/src/third_party/mpc/mpc-1.0.tar.gz
+END
+COPYING.LESSER
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/native_client/!svn/ver/9987/trunk/src/third_party/mpc/COPYING.LESSER
+END
+mpc-0.9.tar.gz
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/native_client/!svn/ver/5215/trunk/src/third_party/mpc/mpc-0.9.tar.gz
+END

@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/native_client/!svn/ver/9011/trunk/src/third_party/ppl
+END
+COPYING
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/native_client/!svn/ver/5215/trunk/src/third_party/ppl/COPYING
+END
+ppl-0.11.2.tar.bz2
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/native_client/!svn/ver/5215/trunk/src/third_party/ppl/ppl-0.11.2.tar.bz2
+END
+ppl-0.12.1.tar.bz2
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/native_client/!svn/ver/9011/trunk/src/third_party/ppl/ppl-0.12.1.tar.bz2
+END

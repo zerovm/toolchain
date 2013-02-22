@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/native_client/!svn/ver/5215/trunk/src/third_party/cloog
+END
+LICENSE.LIB
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/native_client/!svn/ver/5215/trunk/src/third_party/cloog/LICENSE.LIB
+END
+cloog-ppl-0.15.9.tar.gz
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/native_client/!svn/ver/5215/trunk/src/third_party/cloog/cloog-ppl-0.15.9.tar.gz
+END
+cloog-0.16.2.tar.gz
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/native_client/!svn/ver/5215/trunk/src/third_party/cloog/cloog-0.16.2.tar.gz
+END
+LICENSE
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/native_client/!svn/ver/5215/trunk/src/third_party/cloog/LICENSE
+END
