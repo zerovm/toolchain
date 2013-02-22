@@ -43,12 +43,12 @@ SHELL = /bin/bash
 # or add to git-cl codereview.settings:
 #   PUSH_URL_CONFIG: url.ssh://gerrit.chromium.org.pushinsteadof
 #   ORIGIN_URL_CONFIG: http://git.chromium.org
-GIT_BASE_URL = http://git.chromium.org/native_client
+GIT_BASE_URL = https://github.com/zerovm
 
 CROSSARCH = x86_64-nacl
 TOOLCHAINLOC ?= out
 SDKLOC ?= $(abspath $(TOOLCHAINLOC))
-TOOLCHAINNAME ?= nacl-sdk
+TOOLCHAINNAME ?= zvm-sdk
 SDKNAME ?= $(TOOLCHAINNAME)
 SDKROOT ?= $(SDKLOC)/$(SDKNAME)
 DESTDIR ?=
