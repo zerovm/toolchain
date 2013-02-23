@@ -655,7 +655,11 @@ BUILD/stamp-glibc64: BUILD/stamp-$(CROSSARCH)-pregcc-standalone | SRC/glibc
 	    --libdir=/lib \
 	    --host=x86_64-linux-gnu \
 	    --with-headers=$(LINUX_HEADERS) \
-	    --enable-kernel=2.6.18
+	    --enable-kernel=2.6.18 \
+		--disable-sanity-checks \
+		--without-__thread \
+		--enable-shared=no \
+		--with-tls=no
 	$(MAKE) -C BUILD/build-glibc64
 	$(MAKE) -C BUILD/build-glibc64 install_root=$(DESTDIR)$(PREFIX)/$(CROSSARCH) install
 	touch $@
