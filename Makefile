@@ -657,9 +657,7 @@ BUILD/stamp-glibc64: BUILD/stamp-$(CROSSARCH)-pregcc-standalone | SRC/glibc
 	    --with-headers=$(LINUX_HEADERS) \
 	    --enable-kernel=2.6.18 \
 		--disable-sanity-checks \
-		--without-__thread \
-		--enable-shared=no \
-		--with-tls=no
+		--enable-shared=no 
 	$(MAKE) -C BUILD/build-glibc64
 	$(MAKE) -C BUILD/build-glibc64 install_root=$(DESTDIR)$(PREFIX)/$(CROSSARCH) install
 	touch $@
@@ -677,6 +675,15 @@ install-glibc: BUILD/stamp-glibc32 BUILD/stamp-glibc64
 	  install_root="$(INST_GLIBC_PREFIX)/glibc/$(CROSSARCH)" install
 	$(MAKE) -f $(THISMAKEFILE) -C BUILD/build-glibc64 \
 	  install_root="$(INST_GLIBC_PREFIX)/glibc/$(CROSSARCH)" install
+
+install-glibc64: BUILD/stamp-glibc64
+	rm -rf "$(INST_GLIBC_PREFIX)"/glibc
+	mkdir "$(INST_GLIBC_PREFIX)"/glibc
+	$(MAKE) -f $(THISMAKEFILE) sdkdirs \
+	  DESTDIR="" PREFIX="$(INST_GLIBC_PREFIX)/glibc"
+	$(MAKE) -f $(THISMAKEFILE) -C BUILD/build-glibc64 \
+	  install_root="$(INST_GLIBC_PREFIX)/glibc/$(CROSSARCH)" install
+
 
 .PHONY: export-headers
 export-headers: SRC/newlib
