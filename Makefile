@@ -604,7 +604,8 @@ GLIBC_BUILD_DIR = BUILD/build-glibc-$(CROSSARCH)
 GLIBC_CC = $(PREGCC_PREFIX)/bin/$(CROSSARCH)-gcc
 
 # CFLAGS for building glibc.
-GLIBC_CFLAGS = -O2 -g
+#switch off HP_TIMING
+GLIBC_CFLAGS = -O2 -g #-UHP_SMALL_TIMING_AVAIL
 
 ARCH_DEST = $(DESTDIR)$(PREFIX)/$(CROSSARCH)
 ARCH_DEST_INC_NATIVE = $(PREFIX_NATIVE)/$(CROSSARCH)/include
@@ -656,9 +657,10 @@ BUILD/stamp-glibc64: BUILD/stamp-$(CROSSARCH)-pregcc-standalone | SRC/glibc
 	    --host=x86_64-linux-gnu \
 	    --with-headers=$(LINUX_HEADERS) \
 	    --enable-kernel=2.6.18 \
-		--disable-sanity-checks \
-		--enable-shared=no 
-	$(MAKE) -C BUILD/build-glibc64
+	    $(GLIBC_FLAGS)
+#--disable-sanity-checks
+#--enable-shared=no 
+#	$(MAKE) -C BUILD/build-glibc64
 	$(MAKE) -C BUILD/build-glibc64 install_root=$(DESTDIR)$(PREFIX)/$(CROSSARCH) install
 	touch $@
 

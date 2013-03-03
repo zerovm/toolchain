@@ -1,6 +1,6 @@
 #!/bin/bash
 
-MAKE="make -j8"
+MAKE="make -j16"
 TOOLCHAINLOC=~
 
 rm BUILD/stamp-glibc64 -f
