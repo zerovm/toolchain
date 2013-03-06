@@ -892,17 +892,20 @@ endif
 # Build the entire toolchain.
 ##################################################################
 
+zrt.o: CFLAGS+=-DZLIBC_STUB
+zrt.o: $(ZRT_ROOT)/lib/zrt.o
+
 # On platforms where glibc build is slow or unavailable you can specify
 # glibc_download.sh (or any other program) to download glibc
 INST_GLIBC_PROGRAM ?= none
-.PHONY: build-with-glibc
-build-with-glibc: SRC/gcc
+.PHONY: build-with-glibc 
+build-with-glibc: SRC/gcc 
 	$(MAKE) -f $(THISMAKEFILE) sdkdirs
 	cp -f SRC/gcc/COPYING* $(DESTDIR)$(PREFIX)
 #it used to build libc with a stub zrt implementation, zrt-stub is a most
 #simple dependency while building glibc for nacl platform
-	$(MAKE) -C$(ZRT_ROOT) cleandep
-	$(MAKE) -C$(ZRT_ROOT) zlibc_dep
+	rm -f $(ZRT_ROOT)/lib/zrt.o
+	$(MAKE) -f $(THISMAKEFILE) zrt.o
 	$(MAKE) -f $(THISMAKEFILE) BUILD/stamp-$(CROSSARCH)-binutils
 ifeq ($(INST_GLIBC_PROGRAM), none)
 	$(MAKE) -f $(THISMAKEFILE) BUILD/stamp-$(CROSSARCH)-pregcc-standalone
