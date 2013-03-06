@@ -14,7 +14,7 @@ then
 	exit
 fi
 
-GLIBC_CONFIG="--enable-shared=no" \
+GLIBC_CONFIG="--enable-shared=no --with-zrt=yes" \
 GLIBC_CFLAGS="-DLIBC_ENOSYS_DEBUG" \
 ${MAKE} install-glibc64 TOOLCHAINLOC=${TOOLCHAINLOC}
 

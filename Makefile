@@ -23,7 +23,7 @@
 #
 ##############################################################################
 
-default: build-with-glibc
+default:  build-with-glibc
 
 # Delete the target file if the recipe fails after beginning to change the file
 # http://www.gnu.org/software/make/manual/make.html#Errors (Errors in Recipes)
@@ -658,7 +658,7 @@ BUILD/stamp-glibc64: BUILD/stamp-$(CROSSARCH)-pregcc-standalone | SRC/glibc
 	    --with-headers=$(LINUX_HEADERS) \
 	    --enable-kernel=2.6.18 \
 	    $(GLIBC_CONFIG)
-#	$(MAKE) -C BUILD/build-glibc64
+	$(MAKE) -C BUILD/build-glibc64
 	$(MAKE) -C BUILD/build-glibc64 install_root=$(DESTDIR)$(PREFIX)/$(CROSSARCH) install
 	touch $@
 
@@ -676,14 +676,13 @@ install-glibc: BUILD/stamp-glibc32 BUILD/stamp-glibc64
 	$(MAKE) -f $(THISMAKEFILE) -C BUILD/build-glibc64 \
 	  install_root="$(INST_GLIBC_PREFIX)/glibc/$(CROSSARCH)" install
 
-install-glibc64: BUILD/stamp-glibc64
+install-glibc64: 
 	rm -rf "$(INST_GLIBC_PREFIX)"/glibc
 	mkdir "$(INST_GLIBC_PREFIX)"/glibc
 	$(MAKE) -f $(THISMAKEFILE) sdkdirs \
 	  DESTDIR="" PREFIX="$(INST_GLIBC_PREFIX)/glibc"
-	$(MAKE) -f $(THISMAKEFILE) -C BUILD/build-glibc64 \
-	  install_root="$(INST_GLIBC_PREFIX)/glibc/$(CROSSARCH)" install
-
+	rm -f BUILD/stamp-glibc64
+	$(MAKE) BUILD/stamp-glibc64
 
 .PHONY: export-headers
 export-headers: SRC/newlib
@@ -900,11 +899,15 @@ INST_GLIBC_PROGRAM ?= none
 build-with-glibc: SRC/gcc
 	$(MAKE) -f $(THISMAKEFILE) sdkdirs
 	cp -f SRC/gcc/COPYING* $(DESTDIR)$(PREFIX)
+#it used to build libc with a stub zrt implementation, zrt-stub is a most
+#simple dependency while building glibc for nacl platform
+	$(MAKE) -C$(ZRT_ROOT) cleandep
+	$(MAKE) -C$(ZRT_ROOT) zlibc_dep
 	$(MAKE) -f $(THISMAKEFILE) BUILD/stamp-$(CROSSARCH)-binutils
 ifeq ($(INST_GLIBC_PROGRAM), none)
 	$(MAKE) -f $(THISMAKEFILE) BUILD/stamp-$(CROSSARCH)-pregcc-standalone
-	$(MAKE) -f $(THISMAKEFILE) BUILD/stamp-glibc32
-	$(MAKE) -f $(THISMAKEFILE) BUILD/stamp-glibc64
+#	$(MAKE) -f $(THISMAKEFILE) BUILD/stamp-glibc32
+	GLIBC_CONFIG="--with-zrt=yes" $(MAKE) -f $(THISMAKEFILE) BUILD/stamp-glibc64
 else
 	$(INST_GLIBC_PROGRAM) "$(DESTDIR)$(PREFIX)"
 endif
@@ -913,10 +916,13 @@ endif
 	$(MAKE) -f $(THISMAKEFILE) export-headers
 	$(MAKE) -f $(THISMAKEFILE) glibc-adhoc-files
 	$(MAKE) -f $(THISMAKEFILE) BUILD/stamp-$(CROSSARCH)-full-gcc
+#build zrt and replace zrt-stub by real implementation
+	$(MAKE) -C$(ZRT_ROOT) cleandep libclean
+	$(MAKE) -C$(ZRT_ROOT)
 ifeq ($(CANNED_REVISION), no)
 ifeq ($(PLATFORM), win)
 else
-	$(MAKE) -f $(THISMAKEFILE) BUILD/stamp-$(CROSSARCH)-gdb
+#	$(MAKE) -f $(THISMAKEFILE) BUILD/stamp-$(CROSSARCH)-gdb
 endif
 endif
 	$(CREATE_REDIRECTORS) "$(DESTDIR)$(PREFIX)"
