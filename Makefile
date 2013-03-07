@@ -916,7 +916,7 @@ build-with-glibc: SRC/gcc
 	$(MAKE) -f $(THISMAKEFILE) BUILD/stamp-$(CROSSARCH)-binutils
 ifeq ($(INST_GLIBC_PROGRAM), none)
 	$(MAKE) -f $(THISMAKEFILE) BUILD/stamp-$(CROSSARCH)-pregcc-standalone
-	$(MAKE) -f $(THISMAKEFILE) BUILD/stamp-glibc32
+	GLIBC_CONFIG="--with-zrt=yes" $(MAKE) -f $(THISMAKEFILE) BUILD/stamp-glibc32
 	GLIBC_CONFIG="--with-zrt=yes" $(MAKE) -f $(THISMAKEFILE) BUILD/stamp-glibc64
 else
 	$(INST_GLIBC_PROGRAM) "$(DESTDIR)$(PREFIX)"
