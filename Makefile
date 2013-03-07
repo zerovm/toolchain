@@ -634,7 +634,8 @@ BUILD/stamp-glibc32: BUILD/stamp-$(CROSSARCH)-pregcc-standalone | SRC/glibc zrt-
 	    --libdir=/lib32 \
 	    --host=i486-linux-gnu \
 	    --with-headers=$(LINUX_HEADERS) \
-	    --enable-kernel=2.6.18
+	    --enable-kernel=2.6.18 \
+	    $(GLIBC_CONFIG)
 	$(MAKE) -C BUILD/build-glibc32
 	$(MAKE) -C BUILD/build-glibc32 install_root=$(DESTDIR)$(PREFIX)/$(CROSSARCH) install
 	touch $@
