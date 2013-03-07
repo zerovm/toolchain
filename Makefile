@@ -617,7 +617,7 @@ ARCH_DEST_INC_NATIVE = $(PREFIX_NATIVE)/$(CROSSARCH)/include
 LIB_BITS ?= 64
 ARCH_DEST_LIB_NATIVE = $(PREFIX_NATIVE)/$(CROSSARCH)/$(if $(filter 32,$(LIB_BITS)),lib32,lib)
 
-BUILD/stamp-glibc32: BUILD/stamp-$(CROSSARCH)-pregcc-standalone | SRC/glibc
+BUILD/stamp-glibc32: BUILD/stamp-$(CROSSARCH)-pregcc-standalone | SRC/glibc zrt-stub32
 	if [[ ! -d $(LINUX_HEADERS) ]] ; then \
 	  $(MAKE) -f $(THISMAKEFILE) SRC/linux-headers-for-nacl ; \
 	fi
@@ -639,7 +639,7 @@ BUILD/stamp-glibc32: BUILD/stamp-$(CROSSARCH)-pregcc-standalone | SRC/glibc
 	$(MAKE) -C BUILD/build-glibc32 install_root=$(DESTDIR)$(PREFIX)/$(CROSSARCH) install
 	touch $@
 
-BUILD/stamp-glibc64: BUILD/stamp-$(CROSSARCH)-pregcc-standalone | SRC/glibc
+BUILD/stamp-glibc64: BUILD/stamp-$(CROSSARCH)-pregcc-standalone | SRC/glibc zrt-stub64
 	if [[ ! -d $(LINUX_HEADERS) ]] ; then \
 	  $(MAKE) -f $(THISMAKEFILE) SRC/linux-headers-for-nacl ; \
 	fi
@@ -892,8 +892,18 @@ endif
 # Build the entire toolchain.
 ##################################################################
 
-zrt.o: CFLAGS+=-DZLIBC_STUB
-zrt.o: $(ZRT_ROOT)/lib/zrt.o
+ZRT_CFLAGS=-DZLIBC_STUB -pipe -fno-strict-aliasing -mno-tls-direct-seg-refs 
+ZRT_BUILD_OBJ=$(ZRT_CFLAGS) -c -o $(ZRT_ROOT)/lib/zrt.o $(ZRT_ROOT)/lib/zrt.c
+
+#it used to build libc with a stub zrt implementation, zrt-stub is a most
+#simple dependency while building glibc for nacl platform
+zrt-stub32:
+	rm -f $(ZRT_ROOT)/lib/zrt.o
+	$(GLIBC_CC) -m32 -march=i486 $(ZRT_BUILD_OBJ)
+
+zrt-stub64:
+	rm -f $(ZRT_ROOT)/lib/zrt.o 
+	$(GLIBC_CC) -m64 $(ZRT_BUILD_OBJ)
 
 # On platforms where glibc build is slow or unavailable you can specify
 # glibc_download.sh (or any other program) to download glibc
@@ -902,14 +912,10 @@ INST_GLIBC_PROGRAM ?= none
 build-with-glibc: SRC/gcc 
 	$(MAKE) -f $(THISMAKEFILE) sdkdirs
 	cp -f SRC/gcc/COPYING* $(DESTDIR)$(PREFIX)
-#it used to build libc with a stub zrt implementation, zrt-stub is a most
-#simple dependency while building glibc for nacl platform
-	rm -f $(ZRT_ROOT)/lib/zrt.o
-	$(MAKE) -f $(THISMAKEFILE) zrt.o
 	$(MAKE) -f $(THISMAKEFILE) BUILD/stamp-$(CROSSARCH)-binutils
 ifeq ($(INST_GLIBC_PROGRAM), none)
 	$(MAKE) -f $(THISMAKEFILE) BUILD/stamp-$(CROSSARCH)-pregcc-standalone
-#	$(MAKE) -f $(THISMAKEFILE) BUILD/stamp-glibc32
+	$(MAKE) -f $(THISMAKEFILE) BUILD/stamp-glibc32
 	GLIBC_CONFIG="--with-zrt=yes" $(MAKE) -f $(THISMAKEFILE) BUILD/stamp-glibc64
 else
 	$(INST_GLIBC_PROGRAM) "$(DESTDIR)$(PREFIX)"
