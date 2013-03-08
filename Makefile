@@ -677,13 +677,17 @@ install-glibc: BUILD/stamp-glibc32 BUILD/stamp-glibc64
 	$(MAKE) -f $(THISMAKEFILE) -C BUILD/build-glibc64 \
 	  install_root="$(INST_GLIBC_PREFIX)/glibc/$(CROSSARCH)" install
 
+#custom update of glibc
 install-glibc64: 
 	rm -rf "$(INST_GLIBC_PREFIX)"/glibc
 	mkdir "$(INST_GLIBC_PREFIX)"/glibc
 	$(MAKE) -f $(THISMAKEFILE) sdkdirs \
 	  DESTDIR="" PREFIX="$(INST_GLIBC_PREFIX)/glibc"
 	rm -f BUILD/stamp-glibc64
-	$(MAKE) BUILD/stamp-glibc64
+	$(MAKE) -f $(THISMAKEFILE) BUILD/stamp-glibc64
+#build zrt and replace zrt-stub by real implementation
+	make -C$(ZRT_ROOT) clean
+	make -C$(ZRT_ROOT)
 
 .PHONY: export-headers
 export-headers: SRC/newlib
@@ -926,9 +930,6 @@ endif
 	$(MAKE) -f $(THISMAKEFILE) export-headers
 	$(MAKE) -f $(THISMAKEFILE) glibc-adhoc-files
 	$(MAKE) -f $(THISMAKEFILE) BUILD/stamp-$(CROSSARCH)-full-gcc
-#build zrt and replace zrt-stub by real implementation
-	$(MAKE) -C$(ZRT_ROOT) cleandep libclean
-	$(MAKE) -C$(ZRT_ROOT)
 ifeq ($(CANNED_REVISION), no)
 ifeq ($(PLATFORM), win)
 else
@@ -964,6 +965,9 @@ endif
 	) ; done
 	rm -rf "$(DESTDIR)$(PREFIX)"/{include,lib/*.a*,$(CROSSARCH)/lib{,32}/*.la}
 	rm -rf "$(DESTDIR)$(PREFIX)"/{lib/{*/*/*/*{,/*}.la,*.so*},lib{32,64}}
+#build zrt and replace zrt-stub by real implementation
+	make -C$(ZRT_ROOT) cleandep libclean
+	make -C$(ZRT_ROOT)
 
 .PHONY: build-with-newlib
 build-with-newlib: SRC/gcc

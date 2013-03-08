@@ -5,18 +5,6 @@ TOOLCHAINLOC=~
 
 rm BUILD/stamp-glibc64 -f
 
-${MAKE} -C${ZRT_ROOT} cleandep
-${MAKE} -C${ZRT_ROOT} zlibc_dep
-
-if [ ! -f ${ZRT_ROOT}/lib/zrt.o ]
-then
-	echo "${ZRT_ROOT}/lib/zrt.o file not exist"
-	exit
-fi
-
 GLIBC_CONFIG="--enable-shared=no --with-zrt=yes" \
 GLIBC_CFLAGS="-DLIBC_ENOSYS_DEBUG" \
 ${MAKE} install-glibc64 TOOLCHAINLOC=${TOOLCHAINLOC}
-
-${MAKE} -C${ZRT_ROOT} cleandep
-
