@@ -966,8 +966,10 @@ endif
 	rm -rf "$(DESTDIR)$(PREFIX)"/{include,lib/*.a*,$(CROSSARCH)/lib{,32}/*.la}
 	rm -rf "$(DESTDIR)$(PREFIX)"/{lib/{*/*/*/*{,/*}.la,*.so*},lib{32,64}}
 #build zrt and replace zrt-stub by real implementation
-	make -C$(ZRT_ROOT) cleandep libclean
-	make -C$(ZRT_ROOT)
+	echo "Copying zvm.specs to: $(DESTDIR)$(PREFIX)/lib/gcc/$(CROSSARCH)/specs"
+	cp -f SRC/gcc/zvm.specs "$(DESTDIR)$(PREFIX)"/lib/gcc/$(CROSSARCH)/specs
+	ZVM_SDK_ROOT="$(DESTDIR)$(PREFIX)" make -C$(ZRT_ROOT) cleandep libclean
+	ZVM_SDK_ROOT="$(DESTDIR)$(PREFIX)" make -C$(ZRT_ROOT)
 
 .PHONY: build-with-newlib
 build-with-newlib: SRC/gcc
