@@ -48,8 +48,10 @@ GIT_BASE_URL = https://github.com/zerovm
 CROSSARCH = x86_64-nacl
 TOOLCHAINLOC ?= out
 SDKLOC ?= $(abspath $(TOOLCHAINLOC))
-TOOLCHAINNAME ?= zvm-sdk
-SDKNAME ?= $(TOOLCHAINNAME)
+#TOOLCHAINNAME ?= zvm-sdk
+#SDKNAME ?= $(TOOLCHAINNAME)
+SDKNAME ?= zvm-sdk
+SDKROOT ?= $(abspath $(ZVM_SDK_ROOT))
 SDKROOT ?= $(SDKLOC)/$(SDKNAME)
 DESTDIR ?=
 
@@ -970,6 +972,7 @@ endif
 	cp -f SRC/gcc/zvm.specs "$(DESTDIR)$(PREFIX)"/lib/gcc/$(CROSSARCH)/specs
 	ZVM_SDK_ROOT="$(DESTDIR)$(PREFIX)" make -C$(ZRT_ROOT) cleandep libclean
 	ZVM_SDK_ROOT="$(DESTDIR)$(PREFIX)" make -C$(ZRT_ROOT)
+	ZVM_SDK_ROOT="$(DESTDIR)$(PREFIX)" make -C$(ZRT_ROOT) install
 
 .PHONY: build-with-newlib
 build-with-newlib: SRC/gcc
