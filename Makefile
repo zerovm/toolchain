@@ -47,13 +47,31 @@ SHELL = /bin/bash
 GIT_BASE_URL = https://github.com/zerovm
 
 CROSSARCH = x86_64-nacl
-TOOLCHAINLOC ?= out
-SDKLOC ?= $(abspath $(TOOLCHAINLOC))
+#TOOLCHAINLOC ?= out
+#SDKLOC ?= $(abspath $(TOOLCHAINLOC))
 #TOOLCHAINNAME ?= zvm-sdk
 #SDKNAME ?= $(TOOLCHAINNAME)
-SDKNAME ?= zvm-sdk
-SDKROOT ?= $(abspath $(ZVM_SDK_ROOT))
-SDKROOT ?= $(SDKLOC)/$(SDKNAME)
+#SDKNAME ?= zvm-sdk
+define PREFIX_ERR
+
+Please set up ZVM_PREFIX env variable to the desired installation path
+Example: export ZVM_PREFIX=/opt/zerovm
+
+endef
+ifndef ZVM_PREFIX
+$(error $(PREFIX_ERR))
+endif
+define ZRT_ERR
+
+Please set up ZRT_ROOT env variable to the ZRT library root path
+Example: export ZRT_ROOT=$$HOME/zrt
+
+endef
+ifndef ZRT_ROOT
+$(error $(ZRT_ERR))
+endif
+SDKROOT ?= $(abspath $(ZVM_PREFIX))
+#SDKROOT ?= $(SDKLOC)/$(SDKNAME)
 DESTDIR ?=
 
 # We can't use CFLAGS and LDFLAGS since they are passed to sub-makes and
