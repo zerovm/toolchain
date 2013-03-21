@@ -1158,3 +1158,4 @@ nacl-check:
 .PHONY: clean
 clean:
 	rm -rf BUILD/*
+	make -C$(ZRT_ROOT) clean
