@@ -70,7 +70,7 @@ endef
 ifndef ZRT_ROOT
 $(error $(ZRT_ERR))
 endif
-SDKROOT ?= $(abspath $(ZVM_PREFIX))
+SDKROOT ?= $(abspath $(ZVM_DESTDIR)$(ZVM_PREFIX))
 #SDKROOT ?= $(SDKLOC)/$(SDKNAME)
 DESTDIR ?=
 
@@ -987,11 +987,11 @@ endif
 	rm -rf "$(DESTDIR)$(PREFIX)"/{include,lib/*.a*,$(CROSSARCH)/lib{,32}/*.la}
 	rm -rf "$(DESTDIR)$(PREFIX)"/{lib/{*/*/*/*{,/*}.la,*.so*},lib{32,64}}
 #build zrt and replace zrt-stub by real implementation
-	echo "Copying zvm.specs to: $(DESTDIR)$(PREFIX)/lib/gcc/$(CROSSARCH)/specs"
-	cp -f SRC/gcc/zvm.specs "$(DESTDIR)$(PREFIX)"/lib/gcc/$(CROSSARCH)/specs
-	ZVM_SDK_ROOT="$(DESTDIR)$(PREFIX)" make -C$(ZRT_ROOT) cleandep libclean
-	ZVM_SDK_ROOT="$(DESTDIR)$(PREFIX)" make -C$(ZRT_ROOT)
-	ZVM_SDK_ROOT="$(DESTDIR)$(PREFIX)" make -C$(ZRT_ROOT) install
+	echo "Copying zvm.specs to: $(DESTDIR)$(PREFIX)/lib/gcc/$(CROSSARCH)/$(GCC_VERSION)/specs"
+	cp -f SRC/gcc/zvm.specs "$(DESTDIR)$(PREFIX)"/lib/gcc/$(CROSSARCH)/$(GCC_VERSION)/specs
+	make -C$(ZRT_ROOT) cleandep libclean
+	make -C$(ZRT_ROOT)
+	make -C$(ZRT_ROOT) install
 
 .PHONY: build-with-newlib
 build-with-newlib: SRC/gcc
@@ -1157,5 +1157,5 @@ nacl-check:
 
 .PHONY: clean
 clean:
-	rm -rf BUILD/*
+	rm -rf BUILD
 	make -C$(ZRT_ROOT) clean
