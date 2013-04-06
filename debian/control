@@ -1,0 +1,14 @@
+Source: gcc-4.4.3-zerovm
+Section: otherosfs
+Priority: extra
+Maintainer: Constantine Peresypkin <constantine@litestack.com>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.3
+Homepage: http://zerovm.org
+
+Package: gcc-4.4.3-zerovm
+Architecture: amd64
+Depends: ia32-libs, zerovm-dev, ${shlibs:Depends}, ${misc:Depends}
+Description: ZeroVM gcc cross compiling toolchain
+ ZeroVM is an open-source lightweight virtualization platform
+ based on Google Native Client project
