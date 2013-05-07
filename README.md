@@ -39,7 +39,7 @@ _How to build the full toolchain from scratch_
     git clone https://github.com/zerovm/gcc.git
     git clone https://github.com/zerovm/glibc.git
     git clone https://github.com/zerovm/newlib.git
-    git clone https://github.com/zerovm/bintools.git
+    git clone https://github.com/zerovm/binutils.git
     </pre>
 
 3. Build zerovm
