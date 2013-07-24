@@ -5,6 +5,10 @@ _How to build the full toolchain from scratch_
 
 ----
 
+0. Install prerequisites:
+
+    `sudo apt-get install libc6-dev-i386 libglib2.0-dev pkg-config git libzmq-dev build-essential automake autoconf libtool g++-multilib texinfo`
+
 1. Set up environment variables. You need to set them up prior to downloading and building anything. 
     Or just set it up to the directories where you already downloaded/cloned.
   
@@ -46,9 +50,10 @@ _How to build the full toolchain from scratch_
 
     <pre>
     cd $ZEROVM_ROOT/valz
-    make validator install
+    make validator
+    sudo make install
     cd $ZEROVM_ROOT
-    make all install
+    make all install PREFIX=$ZVM_PREFIX
     </pre>
 
 4. Build toolchain
@@ -56,9 +61,26 @@ _How to build the full toolchain from scratch_
     <pre>
     cd $HOME/zvm-toolchain
     make -j8
-    make install
     </pre>
     
     If something goes wrong you will need to DELETE everything (apart from zerovm and validator) 
     in the $ZVM_PREFIX directory and only then do `make clean` and `make` (this is how the gcc toolchain works, sadly).
 
+    Example of cleanup procedures:
+
+    <pre>
+    cd $HOME/zvm-toolchain
+    make clean
+    cd $ZVM_PREFIX
+    rm -fr *
+    cd $ZEROVM_ROOT
+    make install PREFIX=$ZVM_PREFIX
+    </pre>
+
+5. Now you can run zerovm tests
+
+    <pre>
+    export PATH=$ZVM_PREFIX/bin:$PATH
+    cd $ZEROVM_ROOT
+    ./ftests.sh
+    </pre>
