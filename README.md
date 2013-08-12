@@ -84,3 +84,23 @@ _How to build the full toolchain from scratch_
     cd $ZEROVM_ROOT
     ./ftests.sh
     </pre>
+
+6. Install debugger
+
+    Debugger prerequisites:
+
+    <pre>
+    sudo apt-get install flex bison groff libncurses5-dev libexpat1-dev
+    </pre>
+
+    <pre>
+    cd $HOME/zvm-toolchain/SRC
+    git clone https://github.com/zerovm/gdb.git
+    cd gdb
+    mkdir BUILD
+    cd BUILD
+    ../configure --program-prefix=x86_64-nacl- --prefix=$ZVM_PREFIX
+    make -j4
+    make install
+    </pre>
+
