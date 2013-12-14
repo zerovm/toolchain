@@ -707,8 +707,7 @@ install-glibc64:
 	rm -f BUILD/stamp-glibc64
 	$(MAKE) -f $(THISMAKEFILE) BUILD/stamp-glibc64
 #build zrt and replace zrt-stub by real implementation
-	make -C$(ZRT_ROOT) clean
-	make -C$(ZRT_ROOT)
+	make -C$(ZRT_ROOT) clean check
 
 .PHONY: export-headers
 export-headers: SRC/newlib
@@ -989,9 +988,7 @@ endif
 #build zrt and replace zrt-stub by real implementation
 	echo "Copying zvm.specs to: $(DESTDIR)$(PREFIX)/lib/gcc/$(CROSSARCH)/specs"
 	cp -f SRC/gcc/zvm.specs "$(DESTDIR)$(PREFIX)"/lib/gcc/$(CROSSARCH)/specs
-	ZVM_SDK_ROOT="$(DESTDIR)$(PREFIX)" make -C$(ZRT_ROOT) cleandep libclean
-	ZVM_SDK_ROOT="$(DESTDIR)$(PREFIX)" make -C$(ZRT_ROOT)
-	ZVM_SDK_ROOT="$(DESTDIR)$(PREFIX)" make -C$(ZRT_ROOT) install
+	ZVM_SDK_ROOT="$(DESTDIR)$(PREFIX)" make -C$(ZRT_ROOT) cleandep libclean all install
 
 .PHONY: build-with-newlib
 build-with-newlib: SRC/gcc
