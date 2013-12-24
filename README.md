@@ -7,7 +7,7 @@ _How to build the full toolchain from scratch_
 
 0. Install prerequisites:
 
-    `sudo apt-get install libc6-dev-i386 libglib2.0-dev pkg-config git build-essential automake autoconf libtool g++-multilib texinfo flex bison groff`
+    `sudo apt-get install libc6-dev-i386 libglib2.0-dev pkg-config git build-essential automake autoconf libtool g++-multilib texinfo flex bison groff gperf texinfo subversion`
 
     Install zeromq >= 3.2.4
 
