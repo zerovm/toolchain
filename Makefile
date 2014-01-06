@@ -988,7 +988,6 @@ endif
 #build zrt and replace zrt-stub by real implementation
 	echo "Copying zvm.specs to: $(DESTDIR)$(PREFIX)/lib/gcc/$(CROSSARCH)/specs"
 	cp -f SRC/gcc/zvm.specs "$(DESTDIR)$(PREFIX)"/lib/gcc/$(CROSSARCH)/specs
-	ZVM_SDK_ROOT="$(DESTDIR)$(PREFIX)" make -C$(ZRT_ROOT) cleandep libclean all install
 
 .PHONY: build-with-newlib
 build-with-newlib: SRC/gcc
