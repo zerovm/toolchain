@@ -66,10 +66,10 @@ _How to build the full toolchain from scratch_
         cd $HOME/zvm-toolchain
         make -j8
 
-    If something goes wrong you will need to DELETE everything (apart
-    from zerovm and validator) in the $ZVM_PREFIX directory and only
-    then do `make clean` and `make` (this is how the gcc toolchain
-    works, sadly).
+    If something goes wrong you will need to *delete* everything
+    (apart from zerovm and validator) in the $ZVM_PREFIX directory and
+    only then do `make clean` and `make` (this is how the gcc
+    toolchain works, sadly).
 
     Example of cleanup procedures:
 
