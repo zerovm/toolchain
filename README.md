@@ -7,7 +7,9 @@ _How to build the full toolchain from scratch_
 
 0. Install prerequisites:
 
-    `sudo apt-get install libc6-dev-i386 libglib2.0-dev pkg-config git build-essential automake autoconf libtool g++-multilib texinfo flex bison groff gperf texinfo subversion`
+        sudo apt-get install libc6-dev-i386 libglib2.0-dev pkg-config git \
+            build-essential automake autoconf libtool g++-multilib texinfo \
+            flex bison groff gperf texinfo subversion
 
     Install zeromq >= 3.2.4
 
@@ -15,8 +17,8 @@ _How to build the full toolchain from scratch_
 
     or through these packages:
 
-    `http://zvm.rackspace.com/v1/repo/ubuntu/pool/main/z/zeromq3/libzmq3_4.0.1-ubuntu1_amd64.deb`
-    `http://zvm.rackspace.com/v1/repo/ubuntu/pool/main/z/zeromq3/libzmq3-dev_4.0.1-ubuntu1_amd64.deb`
+        http://zvm.rackspace.com/v1/repo/ubuntu/pool/main/z/zeromq3/libzmq3_4.0.1-ubuntu1_amd64.deb
+        http://zvm.rackspace.com/v1/repo/ubuntu/pool/main/z/zeromq3/libzmq3-dev_4.0.1-ubuntu1_amd64.deb
 
     or by following the ZeroVM installation guide on http://zerovm.org/wiki/Download
 
