@@ -22,20 +22,20 @@ _How to build the full toolchain from scratch_
     [ZeroMQ installation guide](http://zeromq.org/area:download).
 
 1. Set up environment variables. You need to set them up prior to
-    downloading and building anything. Or just set it up to the
-    directories where you already downloaded/cloned.
+    building anything. We'll use the following variables:
 
-    `ZEROVM_ROOT` - should point to git clone of `zerovm` repository
+    * `ZEROVM_ROOT`: should point to git clone of `zerovm` repository
+
+
+    * `ZVM_PREFIX`: should point to an *empty writable directory* all
+        files will be installed here after `make install`
+
+    * `ZRT_ROOT`: should point to git clone of `zrt` repository
+
+    We will use these values for this guide:
 
         export ZEROVM_ROOT=$HOME/zerovm
-
-    `ZVM_PREFIX` - should point to an *empty writable directory* all
-    files will be installed here after `make install`
-
         export ZVM_PREFIX=$HOME/zvm-root
-
-    `ZRT_ROOT` - should point to git clone of `zrt` repository
-
         export ZRT_ROOT=$HOME/zrt
 
 2. Clone things:
