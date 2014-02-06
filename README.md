@@ -44,8 +44,8 @@ We will use these values for this guide:
 Clone Things
 ------------
 
+    git clone https://github.com/zerovm/validator.git $HOME/validator
     git clone https://github.com/zerovm/zerovm.git $ZEROVM_ROOT
-    git clone https://github.com/zerovm/validator.git $ZEROVM_ROOT/valz
 
     git clone https://github.com/zerovm/zrt.git $ZRT_ROOT
 
@@ -57,12 +57,22 @@ Clone Things
     git clone https://github.com/zerovm/newlib.git
     git clone https://github.com/zerovm/binutils.git
 
+Build Validator
+---------------
+
+    cd $HOME/validator
+    make validator
+    make install PREFIX=$ZVM_PREFIX
+
+A library was installed in `$ZVM_PREFIX/lib`, so you will want to set
+`LD_LIBRARY_PATH` or install the library globally. We'll just continue
+with the library path set:
+
+    export LD_LIBRARY_PATH=$ZVM_PREFIX/lib
+
 Build ZeroVM
 ------------
 
-    cd $ZEROVM_ROOT/valz
-    make validator
-    sudo make install
     cd $ZEROVM_ROOT
     make all install PREFIX=$ZVM_PREFIX
 
