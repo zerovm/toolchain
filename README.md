@@ -17,8 +17,8 @@ On Debian and Ubuntu, you will want to install these packages:
 Install ZeroMQ version 3.2.4 or greater. You can either install it
 through these packages:
 
-    http://zvm.rackspace.com/v1/repo/ubuntu/pool/main/z/zeromq3/libzmq3_4.0.1-ubuntu1_amd64.deb
-    http://zvm.rackspace.com/v1/repo/ubuntu/pool/main/z/zeromq3/libzmq3-dev_4.0.1-ubuntu1_amd64.deb
+    http://packages.zerovm.org/apt/ubuntu/pool/main/z/zeromq3/libzmq3_4.0.1-ubuntu1_amd64.deb
+    http://packages.zerovm.org/apt/ubuntu/pool/main/z/zeromq3/libzmq3-dev_4.0.1-ubuntu1_amd64.deb
 
 or you can install it manually (don't forget to `sudo ldconfig`
 after install) by following the
