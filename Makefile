@@ -699,7 +699,7 @@ install-glibc: BUILD/stamp-glibc32 BUILD/stamp-glibc64
 	  install_root="$(INST_GLIBC_PREFIX)/glibc/$(CROSSARCH)" install
 
 #custom update of glibc
-install-glibc64: 
+install-glibc64:
 	rm -rf "$(INST_GLIBC_PREFIX)"/glibc
 	mkdir "$(INST_GLIBC_PREFIX)"/glibc
 	$(MAKE) -f $(THISMAKEFILE) sdkdirs \
@@ -917,7 +917,7 @@ endif
 # Build the entire toolchain.
 ##################################################################
 
-ZRT_CFLAGS=-DZLIBC_STUB -pipe -fno-strict-aliasing -mno-tls-direct-seg-refs 
+ZRT_CFLAGS=-DZLIBC_STUB -pipe -fno-strict-aliasing -mno-tls-direct-seg-refs
 ZRT_BUILD_OBJ=$(ZRT_CFLAGS) -c -o $(ZRT_ROOT)/lib/zrt.o $(ZRT_ROOT)/lib/zrt.c
 
 #it used to build libc with a stub zrt implementation, zrt-stub is a most
@@ -927,14 +927,14 @@ zrt-stub32:
 	$(GLIBC_CC) -m32 -march=i486 $(ZRT_BUILD_OBJ)
 
 zrt-stub64:
-	rm -f $(ZRT_ROOT)/lib/zrt.o 
+	rm -f $(ZRT_ROOT)/lib/zrt.o
 	$(GLIBC_CC) -m64 $(ZRT_BUILD_OBJ)
 
 # On platforms where glibc build is slow or unavailable you can specify
 # glibc_download.sh (or any other program) to download glibc
 INST_GLIBC_PROGRAM ?= none
-.PHONY: build-with-glibc 
-build-with-glibc: SRC/gcc 
+.PHONY: build-with-glibc
+build-with-glibc: SRC/gcc
 	$(MAKE) -f $(THISMAKEFILE) sdkdirs
 	cp -f SRC/gcc/COPYING* $(DESTDIR)$(PREFIX)
 	$(MAKE) -f $(THISMAKEFILE) BUILD/stamp-$(CROSSARCH)-binutils
