@@ -68,7 +68,7 @@ A library was installed in `$ZVM_PREFIX/lib`, so you will want to set
 `LD_LIBRARY_PATH` or install the library globally. We'll just continue
 with the library path set:
 
-    export LD_LIBRARY_PATH=$ZVM_PREFIX/lib
+    export LD_LIBRARY_PATH=$ZVM_PREFIX/lib64
 
 Build ZeroVM
 ------------
