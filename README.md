@@ -64,7 +64,7 @@ Build Validator
     make validator
     make install PREFIX=$ZVM_PREFIX
 
-A library was installed in `$ZVM_PREFIX/lib`, so you will want to set
+A library was installed in `$ZVM_PREFIX/lib64`, so you will want to set
 `LD_LIBRARY_PATH` or install the library globally. We'll just continue
 with the library path set:
 
@@ -74,7 +74,9 @@ Build ZeroVM
 ------------
 
     cd $ZEROVM_ROOT
-    make all install PREFIX=$ZVM_PREFIX
+    LIBRARY_PATH=$ZVM_PREFIX/lib64 make all install PREFIX=$ZVM_PREFIX
+    
+You will need to add `LIBRARY_PATH` if you have installed validator into `$ZVM_PREFIX`, see above.
 
 Build Toolchain
 ---------------
