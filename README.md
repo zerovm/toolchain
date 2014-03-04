@@ -14,7 +14,7 @@ On Debian and Ubuntu, you will want to install these packages:
         build-essential automake autoconf libtool g++-multilib texinfo \
         flex bison groff gperf texinfo subversion
 
-Install ZeroMQ version 3.2.4 or greater. You can either install it
+Install ZeroMQ version 4.0.1 or greater. You can either install it
 through these packages:
 
     http://packages.zerovm.org/apt/ubuntu/pool/main/z/zeromq3/libzmq3_4.0.1-ubuntu1_amd64.deb
