@@ -784,6 +784,7 @@ endif
 	    CFLAGS_FOR_TARGET="-O2 -g $(GCC_CFLAGS_FOR_TARGET-glibc)" \
 	    CXXFLAGS_FOR_TARGET="-O2 -g $(GCC_CFLAGS_FOR_TARGET-glibc)" \
 	    --prefix=$(PREFIX) \
+	    --with-headers \
 	    $(GCC_CONFIGURE_FLAGS) \
 	    $(GCC_CONFIGURE_FLAGS-glibc)
 ifeq ($(PLATFORM), linux)
