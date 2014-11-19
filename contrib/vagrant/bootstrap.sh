@@ -5,6 +5,7 @@ sudo apt-get install python-software-properties -y
 sudo add-apt-repository ppa:zerovm-ci/zerovm-latest -y
 sudo apt-get update
 
+WORKSPACE=$HOME/toolchain
 DEPS="libc6-dev-i386 libglib2.0-dev pkg-config git"
 DEPS="$DEPS build-essential automake autoconf libtool g++-multilib texinfo"
 DEPS="$DEPS flex bison groff gperf texinfo subversion zerovm-zmq-dev"
@@ -15,8 +16,10 @@ sudo apt-get install $DEPS -y
 source /vagrant/toolchainrc
 
 git clone https://github.com/zerovm/zrt.git $ZRT_ROOT
-git clone https://github.com/zerovm/toolchain.git $HOME/zvm-toolchain
-cd $HOME/zvm-toolchain/SRC
+# Copy the current clone of toolchain from the shared dir to another working
+# directory
+rsync -az --exclude=contrib/vagrant/.* /host-workspace/ $WORKSPACE
+cd $WORKSPACE/SRC
 git clone https://github.com/zerovm/linux-headers-for-nacl.git
 git clone https://github.com/zerovm/gcc.git
 git clone https://github.com/zerovm/glibc.git
@@ -25,7 +28,7 @@ git clone https://github.com/zerovm/binutils.git
 
 ######################
 # Build the toolchain:
-cd $HOME/zvm-toolchain
+cd $WORKSPACE
 # this will take a while; usually about 25-30 minutes
 make -j8 ZEROVM=`which zerovm`  # e.g., '/usr/bin/zerovm'
 
@@ -61,11 +64,3 @@ cd $HOME/libffi
 ./configure --host=x86_64-nacl --prefix=$ZVM_PREFIX/x86_64-nacl
 make
 make install
-
-# finally, build zpython:
-cd $ZPYTHON_ROOT
-./configure
-make host
-./2build_zpython.sh
-echo "Built '$ZPYTHON_ROOT/python.tar'"
-# ./3test.py
