@@ -4,7 +4,3 @@ export ZRT_ROOT=$HOME/zrt
 export LD_LIBRARY_PATH=/usr/lib64
 export CPATH=/usr/x86_64-nacl/include
 export PATH="$PATH:$ZVM_PREFIX/bin"
-
-# for building zpython2:
-export ZPYTHON_ROOT=$HOME/zpython2
-export CPATH="$CPATH:$HOME/libffi/x86_64-pc-nacl/include"
