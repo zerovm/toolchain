@@ -1,0 +1,84 @@
+diff --git a/src/Congruence_System.defs.hh b/src/Congruence_System.defs.hh
+index 78f0d1a..38f2d86 100644
+--- a/src/Congruence_System.defs.hh
++++ b/src/Congruence_System.defs.hh
+@@ -33,6 +33,7 @@ site: http://www.cs.unipr.it/ppl/ . */
+ #include "Grid.types.hh"
+ #include "Grid_Certificate.types.hh"
+ #include <iosfwd>
++#include <cstddef>
+ 
+ namespace Parma_Polyhedra_Library {
+ 
+@@ -235,7 +236,7 @@ public:
+   class const_iterator
+     : public std::iterator<std::forward_iterator_tag,
+                          Congruence,
+-                         ptrdiff_t,
++                         std::ptrdiff_t,
+                          const Congruence*,
+                          const Congruence&> {
+   public:
+diff --git a/src/Constraint_System.defs.hh b/src/Constraint_System.defs.hh
+index a3c614f..a453591 100644
+--- a/src/Constraint_System.defs.hh
++++ b/src/Constraint_System.defs.hh
+@@ -33,6 +33,7 @@ site: http://www.cs.unipr.it/ppl/ . */
+ #include "Congruence_System.types.hh"
+ #include <iterator>
+ #include <iosfwd>
++#include <cstddef>
+ 
+ namespace Parma_Polyhedra_Library {
+ 
+@@ -204,7 +205,7 @@ public:
+   class const_iterator
+     : public std::iterator<std::forward_iterator_tag,
+                          Constraint,
+-                         ptrdiff_t,
++                         std::ptrdiff_t,
+                          const Constraint*,
+                          const Constraint&> {
+   public:
+diff --git a/src/Generator_System.defs.hh b/src/Generator_System.defs.hh
+index 59e7448..b588a6c 100644
+--- a/src/Generator_System.defs.hh
++++ b/src/Generator_System.defs.hh
+@@ -33,6 +33,7 @@ site: http://www.cs.unipr.it/ppl/ . */
+ #include "Polyhedron.types.hh"
+ #include "Poly_Con_Relation.defs.hh"
+ #include <iosfwd>
++#include <cstddef>
+ 
+ namespace Parma_Polyhedra_Library {
+ 
+@@ -250,7 +251,7 @@ public:
+   class const_iterator
+     : public std::iterator<std::forward_iterator_tag,
+                          Generator,
+-                         ptrdiff_t,
++                         std::ptrdiff_t,
+                          const Generator*,
+                          const Generator&> {
+   public:
+diff --git a/src/Grid_Generator_System.defs.hh b/src/Grid_Generator_System.defs.hh
+index 4b124b4..6796758 100644
+--- a/src/Grid_Generator_System.defs.hh
++++ b/src/Grid_Generator_System.defs.hh
+@@ -30,6 +30,7 @@ site: http://www.cs.unipr.it/ppl/ . */
+ #include "Variables_Set.types.hh"
+ #include "Grid.types.hh"
+ #include <iosfwd>
++#include <cstddef>
+ 
+ namespace Parma_Polyhedra_Library {
+ 
+@@ -267,7 +268,7 @@ public:
+   class const_iterator
+     : public std::iterator<std::forward_iterator_tag,
+                          Grid_Generator,
+-                         ptrdiff_t,
++                         std::ptrdiff_t,
+                          const Grid_Generator*,
+                          const Grid_Generator&>,
+       private Generator_System::const_iterator {

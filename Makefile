@@ -246,6 +246,7 @@ all-src-gcc-extras = $(gcc-extras:%=SRC/.gcc-extra-%)
 $(all-src-gcc-extras): SRC/.gcc-extra-%: | SRC
 	rm -rf SRC/.gcc-extra-$*
 	cd SRC && tar xpf $(SRCDIR)/$(gcc_extra_dir)/$*-$(gcc_extra_version).tar.*
+	cd SRC && test -f $(SRCDIR)/$(gcc_extra_dir)/$*-$(gcc_extra_version).patch && cd $*-$(gcc_extra_version) && patch -p1 < ../$(SRCDIR)/$(gcc_extra_dir)/$*-$(gcc_extra_version).patch || true
 	mv SRC/$*-$(gcc_extra_version) SRC/.gcc-extra-$*
 
 # All Macs need Core2 assembly and --enable-fat is broken with stock MacOS gcc.
