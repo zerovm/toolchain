@@ -698,7 +698,7 @@ install-glibc: BUILD/stamp-glibc32 BUILD/stamp-glibc64
 	$(MAKE) -f $(THISMAKEFILE) -C BUILD/build-glibc64 \
 	  install_root="$(INST_GLIBC_PREFIX)/glibc/$(CROSSARCH)" install
 
-#custom update of glibc
+#this goal is used by ./build_zlibc.sh script for rapid rebuild only glibc-zrt
 install-glibc64:
 	rm -rf "$(INST_GLIBC_PREFIX)"/glibc
 	mkdir "$(INST_GLIBC_PREFIX)"/glibc
@@ -706,7 +706,7 @@ install-glibc64:
 	  DESTDIR="" PREFIX="$(INST_GLIBC_PREFIX)/glibc"
 	rm -f BUILD/stamp-glibc64
 	$(MAKE) -f $(THISMAKEFILE) BUILD/stamp-glibc64
-#build zrt and replace zrt-stub by real implementation
+#check final unstubbed zrt
 	make -C$(ZRT_ROOT) clean check
 
 .PHONY: export-headers
