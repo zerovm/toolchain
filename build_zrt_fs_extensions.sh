@@ -24,6 +24,9 @@ bash fetch_patch_build_install.sh || exit 1
 cd $ZEROVM_PORTS/archivemount
 bash fetch_patch_build_install.sh || exit 1
 
+cd $ZEROVM_PORTS/unionfs-fuse
+bash fetch_patch_build_install.sh || exit 1
+
 echo install zrt fuse-ext
 cd $ZRT_ROOT
 FUSEGLUE_LDFLAGS="-archivemount" FUSEGLUE_EXT=1 make clean build install autotests || exit 1
